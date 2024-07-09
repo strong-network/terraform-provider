@@ -1,0 +1,1 @@
+# strong-terraform-provider
