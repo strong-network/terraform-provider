@@ -1,6 +1,6 @@
 # Strong Network Terraform Provider
 
-This is a guide for the Strong Network Terraform provider. It can be downloaded with the Strong Network installer image and must be placed in the `~/.terraform.d/plugins` directory on your system. After placing the provider in the correct directory, run the terraform commands with the `-plugin-dir` flag set to that directory.
+This is a guide for the Strong Network Terraform provider. It can be downloaded with the Strong Network installer image and must be placed in the `~/.terraform.d/plugins` directory on your system. The full path should look like ``~/.terraform.d/plugins/strong.network/strong-network/strong/<VERSION>/<SYSTEM>/strong-terraform-provider`. Replace VERSION and SYSTEM with the appropriate values (e.g. 1.0.1 and linux_amd64). After placing the provider in the correct directory, run the `terraform init` command with the `-plugin-dir` flag set to `~/.terraform.d/plugins`.
 
 To use the Strong Network Terraform provider in your Terraform configuration, you need to add the Strong provider as a `required_provider` in your Terraform configuration file. Here is a code snippet to show how to do this:
 
@@ -8,7 +8,7 @@ To use the Strong Network Terraform provider in your Terraform configuration, yo
 terraform {
   required_providers {
     strong = {
-      version = "1.0.0"
+      version = "1.0.1"
       source  = "strong.network/strong-network/strong"
     }
   }
@@ -34,7 +34,7 @@ In `.terraformc` add the configuration to retrieve the provider from your locall
 terraform {
   required_providers {
     strong = {
-      version = "1.0.0"
+      version = "1.0.1"
       source  = "strong-network/strong"
     }
   }
