@@ -1,7 +1,21 @@
 # Strong Network Terraform Provider
 
-This is a guide for the Strong Network Terraform provider. It can be downloaded with the Strong Network installer image and must be placed in the `~/.terraform.d/plugins` directory on your system. The full path should look like `~/.terraform.d/plugins/strong.network/strong-network/strong/<VERSION>/<SYSTEM>/strong-terraform-provider`. Replace VERSION and SYSTEM with the appropriate values (e.g. 1.0.1 and linux_amd64). After placing the provider in the correct directory, run the `terraform init` command with the `-plugin-dir` flag set to `~/.terraform.d/plugins`.
+This is a guide for the Strong Network Terraform provider. It can be downloaded with the Strong Network installer image and must be placed in the `~/.terraform.d/plugins` directory on your system.
+To download the provider, run the Strong Network Installer for the release you are using:
+```
+docker run -it --rm -v ${PWD}:/strong-network/shared \
+              strongnetwork/strong_installer:<VERSION>
+```
+Then fetch the provider using the command
+````
+./strong-cli get-terraform
+```
+The provider binary will then be downloaded to your system.
 
+The provider has to be placed in the local Terraform registry. The full path should look like `~/.terraform.d/plugins/strong.network/strong-network/strong/<VERSION>/<SYSTEM>/strong-terraform-provider`. Replace VERSION (provider version, not Strong Network version) and SYSTEM with the appropriate values (e.g. 1.0.1 and linux_amd64). After placing the provider in the correct directory, run:
+```
+terraform init -plugin-dir="~/.terraform.d/plugins"
+```
 To use the Strong Network Terraform provider in your Terraform configuration, you need to add the Strong provider as a `required_provider` in your Terraform configuration file. Here is a code snippet to show how to do this:
 
 ```hcl
@@ -132,6 +146,11 @@ resource "strong_project" "project" {
   name = "Frontend Development"
   owner_id = strong_user.organization_owner.id
   organization_id = strong_organization.organization.id
+
+  member {
+    id = strong_user.organization_owner.id
+    role = "Project Owner"
+  }
 
   member {
     id = strong_user.project_member.id
